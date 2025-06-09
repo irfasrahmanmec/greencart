@@ -210,6 +210,7 @@ export const dummyProducts = [
     price: 25,
     offerPrice: 20,
     image: [potato_image_1],
+
     description: [
       "Fresh and organic",
       "Rich in carbohydrates",
