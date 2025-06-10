@@ -3,9 +3,8 @@ import { useAppContext } from '../context/appcontext';
 import ProductCard from '../components/ProductCard';
 
 const AllProducts = () => {
-    const { Products } = useAppContext();
+    const { Products, searchQuery, setSearchQuery } = useAppContext();
     const [filteredProducts, setFilteredProducts] = useState([]);
-    const [searchQuery, setSearchQuery] = useState('');
     useEffect(() => {
         if (searchQuery.length > 0) {
             setFilteredProducts(
