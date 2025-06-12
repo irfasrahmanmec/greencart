@@ -11,7 +11,7 @@ export const AppContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isseller, setIsSeller] = useState(false);
   const [showUserLogin, setShowUserLogin] = useState(false);
-  const [Products, setProducts] = useState([]);
+  const [products, setProducts] = useState([]);
   const [cartItems, setCartItems] = useState({});
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -32,7 +32,7 @@ export const AppContextProvider = ({ children }) => {
   }
 
   //Update the cart items when the user adds an item
-  const updateCartItems = (itemId, quantity) => {
+  const updateCartItem = (itemId, quantity) => {
     let cartData = structuredClone(cartItems);
     cartData[itemId] = quantity;
     setCartItems(cartData);
@@ -46,35 +46,50 @@ export const AppContextProvider = ({ children }) => {
       cartData[itemId] -= 1;
       if (cartData[itemId] === 0) {
         delete cartData[itemId];
-      }
+      }}
       setCartItems(cartData);
       toast.success("Item removed from cart");
-    } else {
-      toast.error("Item not found in cart");
+    };
+
+  // Get Cart Count
+  const getCartCount = () =>{
+    let totalCount = 0;
+    for(const item in cartItems){
+      totalCount += cartItems[item];
     }
-  };
+    return totalCount;
+  }
+
+const getCartAmount = () => {
+  let totalAmount = 0;
+  for (const items in cartItems) {
+    let itemInfo = products.find((product) => product._id === items);
+    if (itemInfo && cartItems[items] > 0) {
+      totalAmount += itemInfo.offerPrice * cartItems[items];
+    }
+  }
+  return Math.floor(totalAmount);
+}
+
   // Fetch products when the component mounts
   useEffect(() => {
     fetchProducts();
   }, []);
 
-  const contextValue = {navigate, user, setUser, isseller, setIsSeller, 
-    showUserLogin, setShowUserLogin, Products, setProducts, currency, cartItems,
-     addToCart, updateCartItems, removeFromCart, searchQuery, setSearchQuery};
+  const value= {navigate, user, setUser, isseller, setIsSeller, 
+    showUserLogin, setShowUserLogin, products, setProducts, currency, cartItems,
+     addToCart, updateCartItem, removeFromCart, searchQuery, setSearchQuery,
+    getCartAmount, getCartCount};
 
   
   return (
-    <AppContext.Provider value={contextValue}>
+    <AppContext.Provider value={ value}>
       {children}
     </AppContext.Provider>
   );
 }
 
-// Rename this hook to useAppContext
+
 export const useAppContext = () => {
-  const context = useContext(AppContext);
-  if (!context) {
-    throw new Error("useAppContext must be used within an AppProvider");
-  }
-  return context;
+  return useContext(AppContext)
 };

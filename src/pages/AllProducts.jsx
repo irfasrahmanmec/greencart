@@ -3,19 +3,19 @@ import { useAppContext } from '../context/appcontext';
 import ProductCard from '../components/ProductCard';
 
 const AllProducts = () => {
-    const { Products, searchQuery, setSearchQuery } = useAppContext();
+    const { products, searchQuery, setSearchQuery } = useAppContext();
     const [filteredProducts, setFilteredProducts] = useState([]);
     useEffect(() => {
         if (searchQuery.length > 0) {
             setFilteredProducts(
-                Products.filter(product => 
+                products.filter(product => 
                     product.name.toLowerCase().includes(searchQuery.toLowerCase()) 
             )
         )
         }else {
-            setFilteredProducts(Products);
+            setFilteredProducts(products);
         }
-    },[Products, searchQuery]);
+    },[products, searchQuery]);
   return (
     <div className='mt-16 flex flex-col'>
         <div className='flex flex-col items-end w-max'>
