@@ -4,10 +4,10 @@ import ProductCard from '../components/ProductCard';
 import { useAppContext } from '../context/appcontext';
 
 const ProductCategory = () => {
-    const { Products } = useAppContext();
+    const { products } = useAppContext();
     const { categories } = useParams();
 
-    const filteredProducts = Products.filter(
+    const filteredProducts = products.filter(
         (product) => product.category.toLowerCase() === categories.toLowerCase()
     );
 
