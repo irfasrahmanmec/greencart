@@ -7,3 +7,20 @@
 --color-primary: #4fbf8b;
 --color-primary-dull: #44ae7c;
 }
+
+
+@layer utilities {
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+}
+
+.no-scrollbar::-webkit-scrollbar{
+  display: none;
+}

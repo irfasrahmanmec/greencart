@@ -4,12 +4,13 @@ import { dummyProducts } from "../assets/assets";
 import toast from "react-hot-toast";
 export const AppContext = createContext();
 
+
 export const AppContextProvider = ({ children }) => {
 
-  const currency  = import.meta.VITE_CURRENCY;
+  const currency  = import.meta.env.VITE_CURRENCY;
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
-  const [isseller, setIsSeller] = useState(false);
+  const [isSeller, setIsSeller] = useState(false);
   const [showUserLogin, setShowUserLogin] = useState(false);
   const [products, setProducts] = useState([]);
   const [cartItems, setCartItems] = useState({});
@@ -32,7 +33,7 @@ export const AppContextProvider = ({ children }) => {
   }
 
   //Update the cart items when the user adds an item
-  const updateCartItems = (itemId, quantity) => {
+  const updateCartItem = (itemId, quantity) => {
     let cartData = structuredClone(cartItems);
     cartData[itemId] = quantity;
     setCartItems(cartData);
@@ -46,13 +47,10 @@ export const AppContextProvider = ({ children }) => {
       cartData[itemId] -= 1;
       if (cartData[itemId] === 0) {
         delete cartData[itemId];
-      }
+      }}
       setCartItems(cartData);
       toast.success("Item removed from cart");
-    } else {
-      toast.error("Item not found in cart");
-    }
-  };
+    };
 
   // Get Cart Count
   const getCartCount = () =>{
@@ -63,31 +61,30 @@ export const AppContextProvider = ({ children }) => {
     return totalCount;
   }
 
-  // Get Cart Total Amount
-  const getCartAmount = ()=>{
-    let totalAmount = 0;
-    for(const items in cartItems){
-      let itemInfo = products.find((product) => product._id === items)
-      if(cartItems[items] > 0){
-        totalAmount += itemInfo.offerPrice * cartItems[items]
-      }
+const getCartAmount = () => {
+  let totalAmount = 0;
+  for (const items in cartItems) {
+    let itemInfo = products.find((product) => product._id === items);
+    if (itemInfo && cartItems[items] > 0) {
+      totalAmount += itemInfo.offerPrice * cartItems[items];
     }
-      return math.floor(totalAmount)
   }
+  return Math.floor(totalAmount);
+}
 
   // Fetch products when the component mounts
   useEffect(() => {
     fetchProducts();
   }, []);
 
-  const value= {navigate, user, setUser, isseller, setIsSeller, 
+  const value= {navigate, user, setUser, isSeller, setIsSeller, 
     showUserLogin, setShowUserLogin, products, setProducts, currency, cartItems,
-     addToCart, updateCartItems, removeFromCart, searchQuery, setSearchQuery,
+     addToCart, updateCartItem, removeFromCart, searchQuery, setSearchQuery,
     getCartAmount, getCartCount};
 
   
   return (
-    <AppContext.Provider value={ value}>
+    <AppContext.Provider value={value}>
       {children}
     </AppContext.Provider>
   );

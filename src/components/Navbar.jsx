@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useNavigate, NavLink } from 'react-router-dom'
 import assets from '../assets/assets'
-import { useAppContext } from '../context/appcontext'
+import { useAppContext } from '../context/AppContext'
 
 
 
