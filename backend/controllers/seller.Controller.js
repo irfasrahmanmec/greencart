@@ -1,3 +1,4 @@
+import jwt from 'jsonwebtoken';
 
 
 // Login Seller : /api/seller/login
@@ -22,7 +23,7 @@ export const sellerLogin = async (req, res) => {
     }
    } catch (error) {
         console.log(error.message);
-        res.json({ sucess: false, message: error.message });
+        return res.json({ sucess: false, message: error.message });
    }
 }
 

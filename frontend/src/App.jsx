@@ -17,7 +17,7 @@ import SellerLayout from './pages/seller/SellerLayout'
 import AddProduct from './pages/seller/AddProduct'
 import Orders from './pages/seller/Orders'
 import ProductList from './pages/seller/ProductList'
-import AddAddress from './pages/AddAddress'
+
 
 const App = () => {
   const isSellerPath = useLocation().pathname.includes("seller")
