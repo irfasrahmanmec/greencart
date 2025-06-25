@@ -23,11 +23,7 @@ export const sellerLogin = async (req, res) => {
     }
    } catch (error) {
         console.log(error.message);
-<<<<<<< HEAD
         return res.json({ sucess: false, message: error.message });
-=======
-        return res.json({ success: false, message: error.message });
->>>>>>> 1684e69 (Seller Login, Seller Logout & AddProduct axios done)
    }
 }
 
