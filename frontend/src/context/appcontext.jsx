@@ -30,7 +30,11 @@ export const AppContextProvider = ({ children }) => {
         setIsSeller(fasle)
       }
     } catch (error) {
+<<<<<<< HEAD
       
+=======
+        setIsSeller(false)
+>>>>>>> 1684e69 (Seller Login, Seller Logout & AddProduct axios done)
     }
   }
 

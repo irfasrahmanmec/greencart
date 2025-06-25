@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useAppContext } from '../../context/AppContext';
+<<<<<<< HEAD
 import axios from 'axios';
+=======
+>>>>>>> 1684e69 (Seller Login, Seller Logout & AddProduct axios done)
 import toast from "react-hot-toast";
 
 const SellerLogin = () => {
@@ -13,7 +16,11 @@ const SellerLogin = () => {
         event.preventDefault();
         try {
             const { data } = await axios.post('/api/seller/login', {email, password})
+<<<<<<< HEAD
             if(data.sucess) {
+=======
+            if(data.success) {
+>>>>>>> 1684e69 (Seller Login, Seller Logout & AddProduct axios done)
                 setIsSeller(true);
                 navigate('/seller');
             } else {

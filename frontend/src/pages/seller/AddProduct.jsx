@@ -23,7 +23,11 @@ const AddProduct = () => {
                 price,
                 offerPrice,
             }
+<<<<<<< HEAD
             const formData = new formData();
+=======
+            const formData = new FormData();
+>>>>>>> 1684e69 (Seller Login, Seller Logout & AddProduct axios done)
             formData.append('productData', JSON.stringify(productData));
             for (let i = 0; i < files.length; i++) {
                 formData.append('images', files[i])

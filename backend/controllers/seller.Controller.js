@@ -19,11 +19,15 @@ export const sellerLogin = async (req, res) => {
        
         return res.json({ success: true, message: 'Seller Logged In' })
     } else {
-        return res.json({ sucess: false, message: 'Invalid Credentials' });
+        return res.json({ success: false, message: 'Invalid Credentials' });
     }
    } catch (error) {
         console.log(error.message);
+<<<<<<< HEAD
         return res.json({ sucess: false, message: error.message });
+=======
+        return res.json({ success: false, message: error.message });
+>>>>>>> 1684e69 (Seller Login, Seller Logout & AddProduct axios done)
    }
 }
 
@@ -33,7 +37,7 @@ export const isSellerAuth = async (req, res) => {
         return res.json({success: true});
     } catch (error) {
         console.log(error.message);
-        res.json({ sucess: false, message: error.message });
+        res.json({ success: false, message: error.message });
     }
 }
 
@@ -50,6 +54,6 @@ export const sellerLogout =async (req, res) => {
         return res.json({ success: true, message: 'Seller Logged Out' })
     } catch (error) {
         console.log(error.message);
-        res.json({ sucess: false, message: error.message });
+        res.json({ success: false, message: error.message });
     }
 }

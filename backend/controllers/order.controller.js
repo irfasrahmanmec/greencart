@@ -6,7 +6,7 @@ export const placeOrderCOD =async (req, res) => {
     try {
         const { userId, items, address } = req.body;
         if(!address || items.length === 0) {
-            return res.json({ sucess: false, message: 'Invalid Data'})
+            return res.json({ success: false, message: 'Invalid Data'})
         }
         // Calculate Amount Using Items
         let amount = await items.reduce(async (acc, item) => {

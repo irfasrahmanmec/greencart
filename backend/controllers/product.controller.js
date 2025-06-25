@@ -1,4 +1,7 @@
-import { v2 as cloudinary } from 'cloudinary'
+
+import Product from '../models/product.model.js';
+import { v2 as cloudinary } from 'cloudinary';
+
 // Add Product : /api/product/add
 export const addProduct = async (req, res) => {
     try {
@@ -13,9 +16,9 @@ export const addProduct = async (req, res) => {
             })
         )
 
-        await productById.create({...productData, image: imagesUrl})
+        await Product.create({...productData, image: imagesUrl})
 
-        res.json({sucess: true, message: "Product Added"})
+        res.json({success: true, message: "Product Added"})
     } catch (error) {
         console.log(error.message);
         res.json({ success: false, message: error.message })
@@ -25,7 +28,7 @@ export const addProduct = async (req, res) => {
 // Get Product : /api/product/list
 export const productList = async (req, res) => {
     try {
-        const products = await productById.find({})
+        const products = await Product.find({})
         res.json({ success: true, products })
     } catch (error) {
         console.log(error.message);
@@ -37,7 +40,7 @@ export const productList = async (req, res) => {
 export const productById = async (req, res) => {
     try {
         const { id } = req.body
-        const product = await product.findById(id)
+        const product = await Product.find(id)
         res.json({ success: true, product })
     } catch (error) {
         console.log(error.message);
